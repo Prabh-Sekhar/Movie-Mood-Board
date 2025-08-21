@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import Navbar from "./Navbar"
+import Navbar from "./components/Navbar"
 import './App.css'
 import MovieCard from './components/MovieCard'
 import SearchBar from './components/searchBar'
@@ -42,8 +42,8 @@ function App() {
         )
       })}
     </div>
-    <SearchBar/>
-    {/* <MovieDetails/> */}
+    {/* <SearchBar/> */}
+    <MovieDetails/>
     </>
   )
 }
