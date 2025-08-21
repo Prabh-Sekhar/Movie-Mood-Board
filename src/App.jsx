@@ -1,9 +1,13 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import MovieCard from './components/MovieCard'
+import Favourites from './components/Favourites'
+import MovieTile from './components/ MovieTile'
 
 function App() {
   const API_KEY = "5dc1ad459cf1db2a5a4406ee2dabbbe0"
+
+  const [favouritesOpen, setFavouritesOpen] = useState(true);
   
   const [movie, setMovie] = useState([{
       adult: false,
@@ -30,12 +34,13 @@ function App() {
   }, [])
 
   return (
-    <div className='movie-card-container'>
-      {movie.map((movie) => {
-        return(
-        <MovieCard title={movie.title} img={movie.poster_path} release={movie.release_date} rating={movie.vote_average}/>
-        )
-      })}
+    <div className='app-layout'>
+      <div className={`favourites-container ${favouritesOpen ? "open" : "closed"}`}>
+        {favouritesOpen && <Favourites movie={movie} />}
+      </div>
+      <div className='movie-card-container'>
+        <MovieTile movie={movie} tileTitle="Trending Now"/>
+      </div>
     </div>
   )
 }
