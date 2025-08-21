@@ -3,8 +3,6 @@ import MovieCard from './MovieCard'
 import { useState, useEffect, useRef } from 'react'
 
 export default function MovieTile(props) {
-    console.log(props.movie)
-    console.log(props.movie.title)
 
     const API_KEY = "5dc1ad459cf1db2a5a4406ee2dabbbe0"
 
