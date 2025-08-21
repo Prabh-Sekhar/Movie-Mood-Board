@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react'
+import Navbar from "./Navbar"
 import './App.css'
 import MovieCard from './components/MovieCard'
+import SearchBar from './components/searchBar'
+import MovieDetails from './components/movieDetails'
 
 function App() {
   const API_KEY = "5dc1ad459cf1db2a5a4406ee2dabbbe0"
@@ -30,6 +33,8 @@ function App() {
   }, [])
 
   return (
+    <>
+    <Navbar />
     <div className='movie-card-container'>
       {movie.map((movie) => {
         return(
@@ -37,6 +42,9 @@ function App() {
         )
       })}
     </div>
+    <SearchBar/>
+    {/* <MovieDetails/> */}
+    </>
   )
 }
 
