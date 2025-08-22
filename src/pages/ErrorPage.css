@@ -1,0 +1,28 @@
+#error-message {
+    color: rgb(155, 155, 155);
+    font-size: 25px;
+    margin-bottom: 50px;
+}
+
+#oops {
+    font-size: 150px;
+    margin-bottom: 30px;
+    color: #5442f4;
+    filter: blur(2px);
+}
+
+#gohome-button {
+    border: none;
+    border-radius: 20px;
+    padding: 10px 30px;
+    font-size: 20px;
+    background: linear-gradient(to right, #2C18E5, #5442f4);
+    color: white;
+    font-weight: 800;
+    transition: transform 0.3s ease 0s, background 1s ease 0s;
+}
+
+#gohome-button:hover {
+    transform: scale(1.05);
+    background: linear-gradient(to right, #5442f4, #2C18E5);
+}

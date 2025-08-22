@@ -6,6 +6,7 @@ import MovieTile from './components/MovieTile'
 import MovieCard from './components/MovieCard'
 import SearchBar from './components/searchBar'
 import MovieDetails from './components/movieDetails'
+import Error from './pages/ErrorPage'
 
 function App() {
   const API_KEY = "5dc1ad459cf1db2a5a4406ee2dabbbe0"
@@ -38,17 +39,7 @@ function App() {
 
   return (
     <>
-    <Navbar />
-    <div className='app-layout'>
-      <div className={`favourites-container ${favouritesOpen ? "open" : "closed"}`}>
-        {favouritesOpen && <Favourites movie={movie} />}
-      </div>
-      <div className='movie-card-container'>
-        <MovieTile movie={movie} tileTitle="Trending Now"/>
-      </div>
-    </div>
-    {/* <SearchBar/> */}
-    {/* <MovieDetails/> */}
+      <Error />
     </>
   )
 }
