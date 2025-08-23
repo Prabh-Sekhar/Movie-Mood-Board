@@ -50,13 +50,14 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
+    padding: 8px 12px;
+    border-radius: 20px;
 }
 
 .navbar>ul>li:hover {
     color: #ffffff;
     background: linear-gradient(90deg, #2C18E5, #5442F4, #6d52ff);
-    padding: 8px 14px;
-    border-radius: 20px;
+    transform: scale(1.1);
 }
 
 /* Dropdown */
