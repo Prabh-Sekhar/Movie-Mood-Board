@@ -7,6 +7,7 @@ import MovieCard from './components/MovieCard'
 import SearchBar from './components/searchBar'
 import MovieDetails from './components/movieDetails'
 import Error from './pages/ErrorPage'
+import HomePage from './pages/HomePage'
 
 function App() {
   const API_KEY = "5dc1ad459cf1db2a5a4406ee2dabbbe0"
@@ -39,7 +40,9 @@ function App() {
 
   return (
     <>
-      <Error />
+      {/* <Error /> */}
+      <HomePage />
+      
     </>
   )
 }
