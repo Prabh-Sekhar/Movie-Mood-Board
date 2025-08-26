@@ -4,6 +4,7 @@ import LatestMovies from "../components/LatestMovies"
 import MovieCard from "../components/MovieCard"
 import MovieTile from "../components/MovieTile"
 import Navbar from "../components/Navbar"
+import PopularMovies from "../components/PopularMovies"
 
 export default function HomePage () {
     return (
@@ -25,6 +26,7 @@ export default function HomePage () {
             
             <MovieTile tileTitle="Trending Now"/>
             <LatestMovies />
+            <PopularMovies />
 
         </>
     )

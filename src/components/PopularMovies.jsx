@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react"
 import ResultMovieCard from "./ResultMovieCard"
-import "./LatestMovies.css"
+import "./PopularMovies.css"
 
-export default function LatestMovies() {
+export default function PopularMovies() {
     const [movies, setMovies] = useState([])
     const [loading, setLoading] = useState(true)
     const apiKey = "5dc1ad459cf1db2a5a4406ee2dabbbe0"
-    const apiUrl = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US&page=1`
+    const apiUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`
 
     useEffect(() => {
         setLoading(true)
@@ -26,7 +26,7 @@ export default function LatestMovies() {
         return (
             <div className="latest-movies-section">
                 <div className="section-header">
-                    <h1 className="section-title">Latest Movies</h1>
+                    <h1 className="section-title">Popular Movies</h1>
                 </div>
                 <div className="loading">Loading movies...</div>
             </div>
@@ -36,7 +36,7 @@ export default function LatestMovies() {
     return (
         <div className="latest-movies-section">
             <div className="section-header">
-                <h1 className="section-title">Latest Movies</h1>
+                <h1 className="section-title">Popular Movies</h1>
                 <span className="movie-count">{movies.length} movies</span>
             </div>
 
