@@ -5,14 +5,6 @@ import MovieCard from "../components/MovieCard"
 import MovieTile from "../components/MovieTile"
 import Navbar from "../components/Navbar"
 
-
-
-const handleAnimationComplete = () => {
-    console.log('Animation completed!');
-};
-
-
-
 export default function HomePage () {
     return (
         <>
