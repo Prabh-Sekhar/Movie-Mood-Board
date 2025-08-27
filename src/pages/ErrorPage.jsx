@@ -7,7 +7,7 @@ export default function ErrorPage() {
         <>
             <LightRays
                 raysOrigin="top-center"
-                raysColor="#00ffff"
+                raysColor="#5442f4"
                 raysSpeed={1.5}
                 lightSpread={0.8}
                 rayLength={1.2}
