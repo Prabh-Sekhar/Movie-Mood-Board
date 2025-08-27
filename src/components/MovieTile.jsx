@@ -22,19 +22,19 @@ export default function MovieTile(props) {
         vote_count: 330
     }])
 
-    const ITEM_WIDTH = 500;
+    const scrollRef = useRef(null);
 
-    const [scrollPosition, setScrollPosition] = useState(0);
-
-    const containerRef = useRef(null);
-
-    const handleScroll = (scrollAmount) => {
-        const newScrollPosition = scrollPosition + scrollAmount;
-
-        setScrollPosition(newScrollPosition);
-
-        containerRef.current.scrollLeft = newScrollPosition;
+    const scroll = (direction) => {
+        if (scrollRef.current) {
+        const { scrollLeft, clientWidth } = scrollRef.current;
+        const scrollAmount = clientWidth * 0.8;
+        scrollRef.current.scrollTo({
+            left: direction === "left" ? scrollLeft - scrollAmount : scrollLeft + scrollAmount,
+            behavior: "smooth",
+        });
+        }
     };
+
 
     useEffect(() => {
         fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`)
@@ -50,13 +50,13 @@ export default function MovieTile(props) {
         <div className='movietile-container'>
             <h1>{props.tileTitle}</h1>
             <div className="scroll-wrapper">
-                <button className="scroll-btn left" onClick={() => {handleScroll(-ITEM_WIDTH)}}>
+                <button className="scroll-btn left" onClick={() => scroll("left")}>
                     {"<"}
                 </button>
 
                 <div
                     className='moviecards'
-                    ref={containerRef}
+                    ref={scrollRef}
                 >
                     {movie.map((movie) => (
                         <MovieCard
@@ -69,7 +69,7 @@ export default function MovieTile(props) {
                     ))}
                 </div>
 
-                <button className="scroll-btn right" onClick={() => {handleScroll(ITEM_WIDTH)}}>
+                <button className="scroll-btn right" onClick={() => scroll("right")}>
                     {">"}
                 </button>
             </div>
