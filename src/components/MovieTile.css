@@ -1,19 +1,20 @@
 .movietile-container h1 {
   font-family: 'Inter', sans-serif;
   color: white;
-  margin: 120px 0 0 40px;
-  font-size: 32px;
+  margin: 0;
+  font-size: 48px;
   padding-left: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 0px;
   align-items: center;
-}
+} 
 
 /* Movie cards container */
 
 .movietile-container {
   width: 100vw;
-  height: 100vh;
+  height: auto;
   display: flex;
+  padding-top: 10px;
   flex-direction: column;
   justify-content: center;
 }
@@ -28,7 +29,6 @@
 
 .movietile-container .moviecards::-webkit-scrollbar {
   display: none;
-  /* ✅ hide scrollbar */
 }
 
 .movietile-container .scroll-wrapper {

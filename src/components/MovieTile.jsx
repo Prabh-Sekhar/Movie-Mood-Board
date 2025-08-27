@@ -48,7 +48,6 @@ export default function MovieTile(props) {
 
     return (
         <div className='movietile-container'>
-            <h1>{props.tileTitle}</h1>
             <div className="scroll-wrapper">
                 <button className="scroll-btn left" onClick={() => scroll("left")}>
                     {"<"}

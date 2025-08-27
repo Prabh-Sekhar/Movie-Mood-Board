@@ -1,5 +1,6 @@
 import LightRays from "../components/Background"
 import Favourites from "../components/Favourites"
+import GradientText from "../components/GradientText"
 import LatestMovies from "../components/LatestMovies"
 import MovieCard from "../components/MovieCard"
 import MovieTile from "../components/MovieTile"
@@ -22,6 +23,15 @@ export default function HomePage () {
                 className="custom-rays"
             />
             <Navbar />
+
+            <GradientText 
+                colors={["#7a6cfcff", "#83aef4ff", "#9b90ffff", "#95b6ffff", "#8f85eeff"]}
+                animationSpeed={3}
+                showBorder={false}
+                className="custom-class"
+            >
+                Trending Now
+            </GradientText>
 
             
             <MovieTile tileTitle="Trending Now"/>
