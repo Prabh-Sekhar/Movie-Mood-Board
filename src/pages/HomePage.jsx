@@ -1,6 +1,7 @@
 import LightRays from "../components/Background"
 import Favourites from "../components/Favourites"
 import GradientText from "../components/GradientText"
+import HeroSection from "../components/HeroSection"
 import LatestMovies from "../components/LatestMovies"
 import MovieCard from "../components/MovieCard"
 import MovieTile from "../components/MovieTile"
@@ -10,7 +11,7 @@ import PopularMovies from "../components/PopularMovies"
 export default function HomePage () {
     return (
         <>
-            <LightRays
+            {/* <LightRays
                 raysOrigin="top-center"
                 raysColor="#5442F4"
                 raysSpeed={1.5}
@@ -21,8 +22,10 @@ export default function HomePage () {
                 noiseAmount={0.1}
                 distortion={0.05}
                 className="custom-rays"
-            />
+            /> */}
+
             <Navbar />
+            <HeroSection /> 
 
             <GradientText 
                 colors={["#7a6cfcff", "#83aef4ff", "#9b90ffff", "#95b6ffff", "#8f85eeff"]}
