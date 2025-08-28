@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=TikTok+Sans:opsz,wght@12..36,300..900&display=swap');
 
 * {
     font-family: "Inter", sans-serif;
@@ -44,19 +45,24 @@ body {
     padding: 0;
 }
 
-.navbar>ul>li {
+.nav-item {
     color: white;
     font-weight: 500;
+    font-family: Montserrat, Inter;
     cursor: pointer;
-    transition: all 0.3s ease;
     position: relative;
-}
-
-.navbar>ul>li:hover {
-    color: #ffffff;
-    background: linear-gradient(90deg, #2C18E5, #5442F4, #6d52ff);
     padding: 8px 14px;
     border-radius: 20px;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+/* Transparent with glowing border instead of solid background */
+.nav-item:hover,
+.nav-item.open {
+    background: transparent;
+    border: 1px solid #6d52ff;
+    box-shadow: 0 0 8px rgba(109, 82, 255, 0.6);
 }
 
 /* Dropdown */
@@ -64,6 +70,24 @@ body {
     position: relative;
 }
 
+.dropdown-btn {
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Arrow hidden by default, shown only on hover */
+.dropdown .arrow {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.dropdown:hover .arrow {
+    opacity: 1;
+}
+
+/* Menu: hidden until state "open" */
 .dropdown-menu {
     position: absolute;
     top: 120%;
@@ -74,16 +98,20 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 14px;
     padding: 12px;
-    display: grid !important;
-    /* override flex */
-    grid-template-columns: repeat(2, minmax(120px, 1fr));
-    gap: 6px 12px;
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5);
     min-width: 300px;
     max-height: 300px;
     overflow-y: auto;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5);
     animation: fadeIn 0.3s ease forwards;
     z-index: 999;
+
+    display: none;
+    grid-template-columns: repeat(2, minmax(120px, 1fr));
+    gap: 6px 12px;
+}
+
+.dropdown.open .dropdown-menu {
+    display: grid;
 }
 
 /* Scrollbar styling */
@@ -137,6 +165,10 @@ body {
     width: 240px;
     background: rgba(255, 255, 255, 0.15);
     border-color: #5442F4;
+}
+
+.search-box {
+    font-family: Montserrat;
 }
 
 /* Animation */

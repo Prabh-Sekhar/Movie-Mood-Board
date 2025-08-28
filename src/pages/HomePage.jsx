@@ -33,7 +33,7 @@ export default function HomePage () {
                 showBorder={false}
                 className="custom-class"
             >
-                Trending Now
+                TRENDING  NOW
             </GradientText>
 
             
