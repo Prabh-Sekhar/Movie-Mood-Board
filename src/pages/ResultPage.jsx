@@ -39,7 +39,7 @@ function buildDiscoverApiUrl({ genreList, selectedSort, pageNo }) {
 }
 
 
-export default function ResultPage({ query = "superman", genre_list, pageNo: propPageNo }) {
+export default function ResultPage({ query, genre_list, pageNo: propPageNo }) {
   const dispatch = useDispatch();
   const {
     filterOpen,
@@ -188,4 +188,5 @@ export default function ResultPage({ query = "superman", genre_list, pageNo: pro
       </main>
     </div>
   );
+
 }
