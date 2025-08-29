@@ -1,0 +1,134 @@
+.filter-window {
+  width: 98%;
+  max-width: 1200px;
+  margin: 0 auto 24px auto;
+  background: #181818;
+  border-radius: 18px;
+  box-shadow: 0 2px 18px rgba(0,0,0,0.22);
+  padding: 32px 36px 18px 36px;
+  position: relative;
+  z-index: 3;
+  border: 1.5px solid #1c1c1c;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: filterDropFade 0.18s;
+}
+
+@keyframes filterDropFade {
+  from { opacity: 0; transform: translateY(-10px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+
+.filter-window-close {
+  position: absolute;
+  top: 18px;
+  right: 28px;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.42rem;
+  font-weight: 600;
+  cursor: pointer;
+  z-index: 2;
+  padding: 0;
+  transition: color 0.11s;
+}
+.filter-window-close:hover {
+  color: #2c18e5;
+}
+
+.filter-window-section {
+  margin-bottom: 8px;
+}
+.filter-window-label {
+  color: #fff;
+  font-size: 1.13rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.filter-window-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+  gap: 16px 22px;
+  margin-bottom: 10px;
+}
+.filter-window-sort-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px 22px;
+  margin-bottom: 10px;
+}
+
+.filter-window-item {
+  background: transparent;
+  border: 1.5px solid #2c18e5;
+  border-radius: 10px;
+  color: #5442F4;
+  font-size: 1.08rem;
+  font-weight: 500;
+  padding: 12px 23px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  transition: background 0.10s, color 0.10s, border 0.13s;
+  justify-content: center;
+  min-height: 37px;
+}
+.filter-window-item.selected,
+.filter-window-item:hover {
+  background: #5442F4;
+  color: #fff;
+}
+
+.filter-window-check {
+  margin-left: 7px;
+  font-size: 1.15rem;
+  color: #fff;
+}
+
+.filter-window-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 18px;
+  margin-top: 10px;
+}
+
+.filter-window-cancel {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.09rem;
+  font-weight: 600;
+  padding: 10px 21px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: background 0.12s, color 0.12s;
+}
+.filter-window-cancel:hover {
+  background: #222;
+  color: #5442F4;
+}
+
+.filter-window-apply {
+  background: #5442F4;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.09rem;
+  border: none;
+  border-radius: 7px;
+  padding: 10px 23px;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.filter-window-apply:hover {
+  background: #fff;
+  color: #2c18e5;
+}
