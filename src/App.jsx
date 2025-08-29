@@ -46,7 +46,9 @@ function App() {
     createRoutesFromElements(
       <Route path = '/' element={<RootLayout />}>
         <Route index element={<HomePage />} />
-        <Route path='results' element={<ResultPage />} />
+        <Route path='results' element={<ResultPageLayout />}>
+          <Route path={`${16}/${1}`} element={<ResultPage genreList={[16]} pageNo={1}/>}/>
+        </Route>
         <Route path='*' element={<ErrorPage />} />
       </Route>
     )
