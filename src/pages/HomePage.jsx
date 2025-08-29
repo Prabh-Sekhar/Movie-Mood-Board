@@ -1,16 +1,17 @@
-import './ErrorPage.css'
 import LightRays from "../components/Background"
+import Favourites from "../components/Favourites"
+import LatestMovies from "../components/LatestMovies"
+import MovieCard from "../components/MovieCard"
+import MovieTile from "../components/MovieTile"
 import Navbar from "../components/Navbar"
-import { useNavigate } from 'react-router-dom'
+import PopularMovies from "../components/PopularMovies"
 
-export default function ErrorPage() {
-    const navigate = useNavigate();
-
+export default function HomePage () {
     return (
         <>
             <LightRays
                 raysOrigin="top-center"
-                raysColor="#5442f4"
+                raysColor="#5442F4"
                 raysSpeed={1.5}
                 lightSpread={0.8}
                 rayLength={1.2}
@@ -20,9 +21,11 @@ export default function ErrorPage() {
                 distortion={0.05}
                 className="custom-rays"
             />
-            <h1 id='oops'><span id='blur'>Oops!</span></h1>
-            <h1 id="error-message">404 | Page not found!</h1>
-            <button id='gohome-button' onClick={() => navigate('/')}>Go Home</button>
+            <Navbar />
+            <MovieTile tileTitle="Trending Now"/>
+            <LatestMovies />
+            <PopularMovies />
+
         </>
     )
 }

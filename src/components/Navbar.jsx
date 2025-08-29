@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import "./Navbar.css";
+import { Link } from 'react-router-dom'
+import { NavLink } from "react-router-dom";
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
@@ -24,14 +26,26 @@ export default function Navbar() {
     return (
         <div className="navbar">
             <ul>
-                <li>Home</li>
+                <li>
+                    <NavLink
+                        to='/'
+                        style={{textDecoration: 'none', color: 'inherit'}}>
+                        Home
+                    </NavLink>
+                </li>
                 <li className="dropdown">
                     <span onClick={() => setIsOpen(!isOpen)}>Mood ▾</span>
                     {isOpen && (
                         <ul className="dropdown-menu">
                             {genres.length > 0 ? (
                                 genres.map((genre) => (
-                                    <li key={genre.id}>{genre.name}</li>
+                                    <NavLink 
+                                        key={genre.id} 
+                                        to={`results/genre/${genre.id}`}
+                                        style={{ textDecoration: 'none', color: 'inherit' }}
+                                    >
+                                        <li>{genre.name}</li>
+                                    </NavLink>
                                 ))
                             ) : (
                                 <li>Loading...</li>

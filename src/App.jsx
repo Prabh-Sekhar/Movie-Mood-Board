@@ -6,7 +6,12 @@ import MovieTile from './components/MovieTile'
 import MovieCard from './components/MovieCard'
 import SearchBar from './components/searchBar'
 import MovieDetails from './components/movieDetails'
-import Error from './pages/ErrorPage'
+import ErrorPage from './pages/ErrorPage'
+import HomePage from './pages/HomePage'
+import ResultPage from './pages/ResultPage'
+import { Route, createBrowserRouter, createRoutesFromChildren, createRoutesFromElements, RouterProvider } from 'react-router-dom'
+import RootLayout from './layout/RootLayout'
+import ResultLayout from './layout/ResultLayout'
 
 function App() {
   const API_KEY = "5dc1ad459cf1db2a5a4406ee2dabbbe0"
@@ -37,10 +42,42 @@ function App() {
       .then(data => setMovie(data.results))
   }, [])
 
+  const [genres, setGenres] = useState([]);
+
+  useEffect(() => {
+      const fetchGenres = async () => {
+          try {
+              const res = await fetch(
+                  `https://api.themoviedb.org/3/genre/movie/list?api_key=5dc1ad459cf1db2a5a4406ee2dabbbe0&language=en-US`
+              );
+              const data = await res.json();
+              setGenres(data.genres || []);
+          } catch (err) {
+              console.error("Error fetching genres:", err);
+          }
+      };
+
+      fetchGenres();
+  }, []);
+
+  console.log(genres);
+
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path='/' element={<RootLayout />}>
+        <Route index element={<HomePage />}/>
+        <Route path='results' element={<ResultLayout />}>
+          {genres.map((genre) => (
+            <Route path={`genre/${genre.id}`} element={<ResultPage genre={genre.name}/>}/>
+          ))}
+        </Route>
+        <Route path='*' element={<ErrorPage />} />
+      </Route>
+    )
+  )
+
   return (
-    <>
-      <Error />
-    </>
+    <RouterProvider router={router}/>
   )
 }
 

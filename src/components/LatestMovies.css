@@ -1,0 +1,122 @@
+.latest-movies-section {
+    padding: 20px 40px;
+    color: white;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.section-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    border-left: 4px solid #5442F4;
+    padding-left: 15px;
+    margin: 0;
+}
+
+.movie-count {
+    font-size: 14px;
+    color: #bbb;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 6px 12px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+}
+
+.view-all {
+    font-size: 14px;
+    color: #bbb;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.view-all:hover {
+    color: #fff;
+}
+
+.movies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+    justify-items: center;
+}
+
+.loading {
+    text-align: center;
+    font-size: 18px;
+    color: #bbb;
+    padding: 40px;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .movies-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+    }
+
+    .section-title {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    .latest-movies-section {
+        padding: 15px 20px;
+    }
+
+    .movies-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 15px;
+    }
+
+    .section-title {
+        font-size: 20px;
+        padding-left: 10px;
+    }
+
+    .section-header {
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .latest-movies-section {
+        padding: 10px 15px;
+    }
+
+    .movies-grid {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 12px;
+    }
+
+    .section-title {
+        font-size: 18px;
+    }
+
+    .movie-count {
+        font-size: 12px;
+        padding: 4px 8px;
+    }
+}
+
+/* Extra large screens */
+@media (min-width: 1400px) {
+    .movies-grid {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 30px;
+    }
+
+    .section-title {
+        font-size: 32px;
+    }
+}
