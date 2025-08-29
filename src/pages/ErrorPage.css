@@ -25,4 +25,5 @@
 #gohome-button:hover {
     transform: scale(1.05);
     background: linear-gradient(to right, #5442f4, #2C18E5);
+    cursor: pointer;
 }

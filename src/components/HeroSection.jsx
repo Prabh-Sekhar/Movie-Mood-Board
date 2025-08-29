@@ -71,7 +71,7 @@ export default function HeroSection() {
                 <div className="hero-content">
                     <h1 className="hero-title">{movie.title}</h1>
                     <div className="hero-meta">
-                        <span className="tag imdb">IMDb {movie.vote_average.toFixed(1)}</span>
+                        <span className="tag imdb">TMDb {movie.vote_average.toFixed(1)}</span>
                         <span className="tag rating">{movie.adult ? "R" : "PG"}</span>
                         <span>{movie.release_date?.slice(0, 4)}</span>
                         {genreNames && <span>{genreNames}</span>}

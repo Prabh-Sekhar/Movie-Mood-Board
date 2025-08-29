@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import "./Navbar.css";
+import { NavLink } from "react-router-dom";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -45,7 +46,7 @@ export default function Navbar() {
   return (
     <div className="navbar">
       <ul>
-        <li className="nav-item">HOME</li>
+        <li className="nav-item"><NavLink to='/' style={{textDecoration: 'none', color: 'inherit'}}>HOME</NavLink></li>
 
         <li
           ref={dropdownRef}
@@ -57,7 +58,8 @@ export default function Navbar() {
             aria-haspopup="true"
             aria-expanded={isOpen}
           >
-            MOOD <span className="arrow">▾</span>
+            MOOD 
+          <span className="arrow">▾</span>
           </span>
 
           {isOpen && (
@@ -65,7 +67,7 @@ export default function Navbar() {
               {genres.length > 0 ? (
                 genres.map((genre) => (
                   <li key={genre.id} role="menuitem">
-                    {genre.name}
+                    <NavLink to={`/results/${genre.id}`} style={{textDecoration: 'none', color: 'inherit'}}>{genre.name}</NavLink>
                   </li>
                 ))
               ) : (

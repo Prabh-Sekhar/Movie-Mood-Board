@@ -8,6 +8,10 @@ import SearchBar from './components/searchBar'
 import MovieDetails from './components/movieDetails'
 import Error from './pages/ErrorPage'
 import HomePage from './pages/HomePage'
+import { Route, Router, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
+import RootLayout from './layout/RootLayout'
+import ErrorPage from './pages/ErrorPage'
+import ResultPage from './pages/ResultPage'
 
 function App() {
   const API_KEY = "5dc1ad459cf1db2a5a4406ee2dabbbe0"
@@ -38,12 +42,18 @@ function App() {
       .then(data => setMovie(data.results))
   }, [])
 
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path = '/' element={<RootLayout />}>
+        <Route index element={<HomePage />} />
+        <Route path='results' element={<ResultPage />} />
+        <Route path='*' element={<ErrorPage />} />
+      </Route>
+    )
+  )
+
   return (
-    <>
-      {/* <Error /> */}
-      <HomePage />
-      
-    </>
+    <RouterProvider router={router}/>
   )
 }
 

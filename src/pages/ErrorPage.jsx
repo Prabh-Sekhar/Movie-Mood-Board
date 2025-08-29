@@ -1,8 +1,12 @@
 import './ErrorPage.css'
 import LightRays from "../components/Background"
 import Navbar from "../components/Navbar"
+import { useNavigate } from 'react-router-dom'
 
 export default function ErrorPage() {
+
+    const navigate = useNavigate();
+
     return (
         <>
             <LightRays
@@ -17,11 +21,11 @@ export default function ErrorPage() {
                 distortion={0.05}
                 className="custom-rays"
             />
-            <Navbar />
+            {/* <Navbar /> */}
             {/* <img src={ErrorIcon} alt="error icon" id='error-icon'/> */}
             <h1 id='oops'><span id='blur'>Oops!</span></h1>
             <h1 id="error-message">404: Page not found!</h1>
-            <button id='gohome-button'>Go Home</button>
+            <button id='gohome-button' onClick={() => navigate('/')}>Go Home</button>
         </>
     )
 }

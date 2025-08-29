@@ -24,7 +24,7 @@ export default function HomePage () {
                 className="custom-rays"
             /> */}
 
-            <Navbar />
+            {/* <Navbar /> */}
             <HeroSection /> 
 
             <GradientText 
