@@ -24,8 +24,8 @@
 .movie-details-container {
   display: flex;
   align-items: flex-start;
+  max-width: 1400px;
   gap: 48px;
-  max-width: 1100px;
   height: 700px;
   padding: 50px;
   padding-top: 140px;
@@ -53,13 +53,16 @@
   margin-bottom: 0;
   margin-top: 0;
   width: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .movie-details-tags {
   display: flex;
   gap: 12px;
   margin-bottom: 8px;
-  margin-left: 25px;
+  margin-left: 20px;
 }
 
 .movie-details-tag {
