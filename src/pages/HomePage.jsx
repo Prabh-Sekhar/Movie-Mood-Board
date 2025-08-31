@@ -11,7 +11,7 @@ import PopularMovies from "../components/PopularMovies"
 export default function HomePage () {
     return (
         <>
-            {/* <LightRays
+            <LightRays
                 raysOrigin="top-center"
                 raysColor="#5442F4"
                 raysSpeed={1.5}
@@ -22,7 +22,7 @@ export default function HomePage () {
                 noiseAmount={0.1}
                 distortion={0.05}
                 className="custom-rays"
-            /> */}
+            />
 
             {/* <Navbar /> */}
             <HeroSection /> 

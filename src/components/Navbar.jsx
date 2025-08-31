@@ -1,10 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import "./Navbar.css";
 import { NavLink } from "react-router-dom";
+import SearchBar from "./SearchBar";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [genres, setGenres] = useState([]);
+  const [showSearch, setShowSearch] = useState(false);
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -22,7 +24,7 @@ export default function Navbar() {
     fetchGenres();
   }, []);
 
-  // Close on outside click or Escape
+  // Close dropdown on outside click or Escape
   useEffect(() => {
     const onDocClick = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -30,10 +32,13 @@ export default function Navbar() {
       }
     };
     const onEsc = (e) => {
-      if (e.key === "Escape") setIsOpen(false);
+      if (e.key === "Escape") {
+        setIsOpen(false);
+        setShowSearch(false);
+      }
     };
 
-    if (isOpen) {
+    if (isOpen || showSearch) {
       document.addEventListener("mousedown", onDocClick);
       document.addEventListener("keydown", onEsc);
     }
@@ -41,46 +46,62 @@ export default function Navbar() {
       document.removeEventListener("mousedown", onDocClick);
       document.removeEventListener("keydown", onEsc);
     };
-  }, [isOpen]);
+  }, [isOpen, showSearch]);
 
   return (
-    <div className="navbar">
-      <ul>
-        <li className="nav-item"><NavLink to='/' style={{textDecoration: 'none', color: 'inherit'}}>HOME</NavLink></li>
+    <>
+      <div className="navbar">
+        <ul>
+          <li className="nav-item">
+            <NavLink
+              to="/"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              HOME
+            </NavLink>
+          </li>
 
-        <li
-          ref={dropdownRef}
-          className={`dropdown nav-item ${isOpen ? "open" : ""}`}
-        >
-          <span
-            className="dropdown-btn"
-            onClick={() => setIsOpen((v) => !v)}
-            aria-haspopup="true"
-            aria-expanded={isOpen}
+          <li
+            ref={dropdownRef}
+            className={`dropdown nav-item ${isOpen ? "open" : ""}`}
           >
-            MOOD 
-          <span className="arrow">▾</span>
-          </span>
+            <span
+              className="dropdown-btn"
+              onClick={() => setIsOpen((v) => !v)}
+              aria-haspopup="true"
+              aria-expanded={isOpen}
+            >
+              MOOD
+              <span className="arrow">▾</span>
+            </span>
 
-          {isOpen && (
-            <ul className="dropdown-menu" role="menu">
-              {genres.length > 0 ? (
-                genres.map((genre) => (
-                  <li key={genre.id} role="menuitem">
-                    <NavLink to={`/results/${genre.id}/1`} style={{textDecoration: 'none', color: 'inherit'}}>{genre.name}</NavLink>
-                  </li>
-                ))
-              ) : (
-                <li>Loading...</li>
-              )}
-            </ul>
-          )}
-        </li>
-      </ul>
+            {isOpen && (
+              <ul className="dropdown-menu" role="menu">
+                {genres.length > 0 ? (
+                  genres.map((genre) => (
+                    <li key={genre.id} role="menuitem">
+                      <NavLink
+                        to={`/results/${genre.id}/1`}
+                        style={{ textDecoration: "none", color: "inherit" }}
+                      >
+                        {genre.name}
+                      </NavLink>
+                    </li>
+                  ))
+                ) : (
+                  <li>Loading...</li>
+                )}
+              </ul>
+            )}
+          </li>
 
-      <div className="search-box">
-        <input type="text" placeholder="SEARCH..." />
+          <li className="nav-item" onClick={() => setShowSearch(true)}>
+            SEARCH
+          </li>
+        </ul>
       </div>
-    </div>
+
+      {showSearch && <SearchBar onClose={() => setShowSearch(false)} />}
+    </>
   );
 }

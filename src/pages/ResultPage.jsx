@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import LightRays from '../components/Background';
 import './ResultPage.css';
 import { useParams } from 'react-router-dom';
 import ResultMovieCard from '../components/ResultMovieCard';
@@ -84,7 +85,6 @@ export default function ResultPage() {
           json = await res.json();
           results = json.results || [];
 
-          // Apply client-side sorting for search results
           if (selectedSort) {
             const [sortField, sortOrder] = selectedSort.split('.');
             results = [...results].sort((a, b) => {
@@ -141,13 +141,26 @@ export default function ResultPage() {
 
   return (
     <div className="result-page">
+      <LightRays
+        raysOrigin="top-center"
+        raysColor="#5442F4"
+        raysSpeed={1.5}
+        lightSpread={0.8}
+        rayLength={1.2}
+        followMouse={true}
+        mouseInfluence={0.1}
+        noiseAmount={0.1}
+        distortion={0.05}
+        className="custom-rays"
+      />
+
       <main className="result-main">
         <div className="result-browse-row">
           <span className="result-browse-title">
             <span className="result-browse-title-bar"></span>
             <span>
               {searchQuery
-                ? `Search Results for "${searchQuery}"`
+                ? `Search Results for ${searchQuery}`
                 : genreList && genreList.length > 0
                   ? "Genre Results"
                   : "Popular Movies"}
@@ -190,7 +203,7 @@ export default function ResultPage() {
           )}
         </div>
 
-        {/* Pagination Controls */}
+
         {!loading && totalPages > 1 && (
           <div className="pagination">
             <button

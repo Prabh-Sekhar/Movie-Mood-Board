@@ -1,20 +1,29 @@
-.searchbar-container {
-  width: 100%;
+.searchbar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(10, 10, 10, 0.85);
   display: flex;
   justify-content: center;
-  margin-top: 60px; /* adjust as needed for vertical alignment */
+  align-items: center;
+  z-index: 2000;
+  backdrop-filter: blur(6px);
 }
 
+/* The box already had styling, we extend it here */
 .searchbar-box {
-  background: rgba(21, 21, 21, 0.85);
+  background: rgba(21, 21, 21, 0.95);
   border-radius: 30px;
   display: flex;
   align-items: center;
-  padding: 0 18px 0 18px;
+  padding: 0 18px;
   width: 480px;
   height: 54px;
-  box-shadow: 0 2px 10px 0 rgba(0,0,0,0.08);
-  border: 1px solid rgba(255,255,255,0.09);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+  animation: popIn 0.3s ease forwards;
 }
 
 .searchbar-icon {
@@ -46,21 +55,40 @@
   border-radius: 22px;
   color: #fff;
   cursor: pointer;
-  padding: 7px 18px 7px 18px;
+  padding: 7px 18px;
   margin-left: 18px;
   font-weight: 500;
   font-size: 1rem;
-  transition: background 0.2s; 
+  transition: background 0.2s;
 }
 
 .searchbar-filter:hover {
   background: rgba(255, 255, 255, 0.13);
-  
 }
 
-.filter-text {
-  margin-left: 7px;
-  font-size: 1rem;
-  font-weight: 500;
+.searchbar-close {
+  position: absolute;
+  top: 30px;
+  right: 50px;
+  font-size: 1.5rem;
   color: #fff;
-} 
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.searchbar-close:hover {
+  color: #5442F4;
+}
+
+/* Subtle animation */
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
