@@ -12,12 +12,13 @@ import { Route, Router, RouterProvider, createBrowserRouter, createRoutesFromEle
 import RootLayout from './layout/RootLayout'
 import ErrorPage from './pages/ErrorPage'
 import ResultPage from './pages/ResultPage'
+import ResultPageLayout from './layout/ResultPageLayout'
 
 function App() {
   const API_KEY = "5dc1ad459cf1db2a5a4406ee2dabbbe0"
 
   const [favouritesOpen, setFavouritesOpen] = useState(true);
-  
+
   const [movie, setMovie] = useState([{
       adult: false,
       backdrop_path: "/kqHypb4MdEBUFiphf49bK99T4cn.jpg",
@@ -47,7 +48,7 @@ function App() {
       <Route path = '/' element={<RootLayout />}>
         <Route index element={<HomePage />} />
         <Route path='results' element={<ResultPageLayout />}>
-          <Route path={`${16}/${1}`} element={<ResultPage genreList={[16]} pageNo={1}/>}/>
+          <Route path=":genreId/:pageNo" element={<ResultPage />}/>
         </Route>
         <Route path='*' element={<ErrorPage />} />
       </Route>

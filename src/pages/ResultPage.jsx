@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import './ResultPage.css';
-import MovieResultCard from '../components/MovieResultCard';
+import { useParams } from 'react-router-dom';
+import ResultMovieCard from '../components/ResultMovieCard';
 import Dropdown from '../components/Dropdown';
 import filter from '../assets/filter.svg';
 import { useDispatch, useSelector } from 'react-redux';
@@ -39,7 +40,8 @@ function buildDiscoverApiUrl({ genreList, selectedSort, pageNo }) {
 }
 
 
-export default function ResultPage({ query = "superman", genre_list, pageNo: propPageNo }) {
+export default function ResultPage() {
+  const { query, genreId, pageNo: paramPageNo } = useParams();
   const dispatch = useDispatch();
   const {
     filterOpen,
@@ -52,29 +54,42 @@ export default function ResultPage({ query = "superman", genre_list, pageNo: pro
   } = useSelector((state) => state.resultPage);
 
   const initialized = useRef(false);
+  // useEffect(() => {
+  //   if (
+  //     initialized.current &&
+  //     searchQuery === (query || '') &&
+  //     JSON.stringify(genreList) === JSON.stringify(genre_list || [])
+  //   ) {
+  //     return;
+  //   }
+  //   if (query) {
+  //     dispatch(setSearchQuery(query));
+  //     dispatch(setGenreList([]));
+  //   } else if (genre_list && genre_list.length > 0) {
+  //     dispatch(setGenreList(genre_list));
+  //     dispatch(setSearchQuery(''));
+  //   } else {
+  //     dispatch(setSearchQuery(''));
+  //     dispatch(setGenreList([]));
+  //   }
+  //   if (propPageNo) dispatch(setPageNo(propPageNo));
+  //   initialized.current = true;
+
+  // }, [query, genre_list, propPageNo, dispatch]);
   useEffect(() => {
-    if (
-      initialized.current &&
-      searchQuery === (query || '') &&
-      JSON.stringify(genreList) === JSON.stringify(genre_list || [])
-    ) {
-      return;
-    }
-    if (query) {
-      dispatch(setSearchQuery(query));
-      dispatch(setGenreList([]));
-    } else if (genre_list && genre_list.length > 0) {
-      dispatch(setGenreList(genre_list));
-      dispatch(setSearchQuery(''));
-    } else {
-      dispatch(setSearchQuery(''));
-      dispatch(setGenreList([]));
-    }
-    if (propPageNo) dispatch(setPageNo(propPageNo));
-    initialized.current = true;
-
-  }, [query, genre_list, propPageNo, dispatch]);
-
+  if (genreId) {
+    dispatch(setGenreList([genreId]));
+    dispatch(setSearchQuery(''));
+  } else if (query) {
+    dispatch(setSearchQuery(query));
+    dispatch(setGenreList([]));
+  } else {
+    dispatch(setSearchQuery(''));
+    dispatch(setGenreList([]));
+  }
+  if (pageNo) dispatch(setPageNo(Number(pageNo)));
+  initialized.current = true;
+  }, [query, genreId, pageNo, dispatch]);
 
   useEffect(() => {
     async function fetchMovies() {
@@ -180,7 +195,13 @@ export default function ResultPage({ query = "superman", genre_list, pageNo: pro
             <div className="no-results">No results found.</div>
           ) : (
             movies.map((movie) => (
-              <MovieResultCard key={movie.id} movie={movie} />
+              <ResultMovieCard
+                        key={movie.id}
+                        img={movie.poster_path}
+                        title={movie.title}
+                        release={movie.release_date}
+                        rating={movie.vote_average}
+              />
             ))
           )}
         </div>

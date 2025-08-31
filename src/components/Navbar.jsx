@@ -67,7 +67,7 @@ export default function Navbar() {
               {genres.length > 0 ? (
                 genres.map((genre) => (
                   <li key={genre.id} role="menuitem">
-                    <NavLink to={`/results/${genre.id}`} style={{textDecoration: 'none', color: 'inherit'}}>{genre.name}</NavLink>
+                    <NavLink to={`/results/${genre.id}/1`} style={{textDecoration: 'none', color: 'inherit'}}>{genre.name}</NavLink>
                   </li>
                 ))
               ) : (
