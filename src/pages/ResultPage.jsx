@@ -13,6 +13,8 @@ import {
   setSearchQuery,
   setGenreList,
   setPageNo,
+  setTotalPages,
+  setTotalResults,
 } from '../redux/resultPageSlice';
 
 const sortOptions = [
@@ -39,7 +41,6 @@ function buildDiscoverApiUrl({ genreList, selectedSort, pageNo }) {
   return url;
 }
 
-
 export default function ResultPage() {
   const { query, genreId, pageNo: paramPageNo } = useParams();
   const dispatch = useDispatch();
@@ -50,46 +51,27 @@ export default function ResultPage() {
     loading,
     searchQuery,
     genreList,
-    pageNo
+    pageNo,
+    totalPages,
+    totalResults,
   } = useSelector((state) => state.resultPage);
 
   const initialized = useRef(false);
-  // useEffect(() => {
-  //   if (
-  //     initialized.current &&
-  //     searchQuery === (query || '') &&
-  //     JSON.stringify(genreList) === JSON.stringify(genre_list || [])
-  //   ) {
-  //     return;
-  //   }
-  //   if (query) {
-  //     dispatch(setSearchQuery(query));
-  //     dispatch(setGenreList([]));
-  //   } else if (genre_list && genre_list.length > 0) {
-  //     dispatch(setGenreList(genre_list));
-  //     dispatch(setSearchQuery(''));
-  //   } else {
-  //     dispatch(setSearchQuery(''));
-  //     dispatch(setGenreList([]));
-  //   }
-  //   if (propPageNo) dispatch(setPageNo(propPageNo));
-  //   initialized.current = true;
 
-  // }, [query, genre_list, propPageNo, dispatch]);
   useEffect(() => {
-  if (genreId) {
-    dispatch(setGenreList([genreId]));
-    dispatch(setSearchQuery(''));
-  } else if (query) {
-    dispatch(setSearchQuery(query));
-    dispatch(setGenreList([]));
-  } else {
-    dispatch(setSearchQuery(''));
-    dispatch(setGenreList([]));
-  }
-  if (pageNo) dispatch(setPageNo(Number(pageNo)));
-  initialized.current = true;
-  }, [query, genreId, pageNo, dispatch]);
+    if (genreId) {
+      dispatch(setGenreList([genreId]));
+      dispatch(setSearchQuery(''));
+    } else if (query) {
+      dispatch(setSearchQuery(query));
+      dispatch(setGenreList([]));
+    } else {
+      dispatch(setSearchQuery(''));
+      dispatch(setGenreList([]));
+    }
+    if (paramPageNo) dispatch(setPageNo(Number(paramPageNo)));
+    initialized.current = true;
+  }, [query, genreId, paramPageNo, dispatch]);
 
   useEffect(() => {
     async function fetchMovies() {
@@ -97,14 +79,13 @@ export default function ResultPage() {
       try {
         let json, results;
         if (searchQuery && searchQuery.trim() !== '') {
-        
           const url = buildSearchApiUrl({ query: searchQuery, pageNo });
           const res = await fetch(url);
           json = await res.json();
           results = json.results || [];
-      
+
+          // Apply client-side sorting for search results
           if (selectedSort) {
-           
             const [sortField, sortOrder] = selectedSort.split('.');
             results = [...results].sort((a, b) => {
               let aVal, bVal;
@@ -121,28 +102,32 @@ export default function ResultPage() {
               else return aVal < bVal ? 1 : aVal > bVal ? -1 : 0;
             });
           }
+
           dispatch(setMovies(results));
-        } else if (genreList && genreList.length > 0) {
-          
-          const url = buildDiscoverApiUrl({ genreList, selectedSort: selectedSort || 'popularity.desc', pageNo });
-          const res = await fetch(url);
-          json = await res.json();
-          dispatch(setMovies(json.results || []));
+          dispatch(setTotalPages(json.total_pages || 1));
+          dispatch(setTotalResults(json.total_results || 0));
+
         } else {
- 
-          const url = buildDiscoverApiUrl({ genreList: [], selectedSort: selectedSort || 'popularity.desc', pageNo });
+          const url = buildDiscoverApiUrl({
+            genreList,
+            selectedSort: selectedSort || 'popularity.desc',
+            pageNo,
+          });
           const res = await fetch(url);
           json = await res.json();
           dispatch(setMovies(json.results || []));
+          dispatch(setTotalPages(json.total_pages || 1));
+          dispatch(setTotalResults(json.total_results || 0));
         }
       } catch (e) {
         dispatch(setMovies([]));
+        dispatch(setTotalPages(1));
+        dispatch(setTotalResults(0));
       }
       dispatch(setLoading(false));
     }
     fetchMovies();
   }, [searchQuery, genreList, selectedSort, pageNo, dispatch]);
-
 
   const handleApply = (newSort) => {
     dispatch(setSelectedSort(newSort));
@@ -153,7 +138,6 @@ export default function ResultPage() {
   const handleCancel = () => {
     dispatch(setFilterOpen(false));
   };
-
 
   return (
     <div className="result-page">
@@ -196,16 +180,36 @@ export default function ResultPage() {
           ) : (
             movies.map((movie) => (
               <ResultMovieCard
-                        key={movie.id}
-                        img={movie.poster_path}
-                        title={movie.title}
-                        release={movie.release_date}
-                        rating={movie.vote_average}
+                key={movie.id}
+                img={movie.poster_path}
+                title={movie.title}
+                release={movie.release_date}
+                rating={movie.vote_average}
               />
             ))
           )}
         </div>
-    
+
+        {/* Pagination Controls */}
+        {!loading && totalPages > 1 && (
+          <div className="pagination">
+            <button
+              disabled={pageNo === 1}
+              onClick={() => dispatch(setPageNo(pageNo - 1))}
+            >
+              Prev
+            </button>
+
+            <span>{pageNo} / {totalPages}</span>
+
+            <button
+              disabled={pageNo === totalPages}
+              onClick={() => dispatch(setPageNo(pageNo + 1))}
+            >
+              Next
+            </button>
+          </div>
+        )}
       </main>
     </div>
   );

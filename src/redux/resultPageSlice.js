@@ -2,12 +2,14 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   filterOpen: false,
-  selectedSort: 'popularity.desc', 
+  selectedSort: 'popularity.desc',
   movies: [],
   loading: false,
-  searchQuery: '',   
-  genreList: [],     
+  searchQuery: '',
+  genreList: [],
   pageNo: 1,
+  totalPages: 1,
+  totalResults: 0,
 };
 
 const resultPageSlice = createSlice({
@@ -21,6 +23,9 @@ const resultPageSlice = createSlice({
       state.selectedSort = action.payload;
     },
     setMovies(state, action) {
+      // For now replace movies. If infinite scroll is needed:
+      // if (state.pageNo > 1) state.movies = [...state.movies, ...action.payload];
+      // else state.movies = action.payload;
       state.movies = action.payload;
     },
     setLoading(state, action) {
@@ -35,11 +40,19 @@ const resultPageSlice = createSlice({
     setPageNo(state, action) {
       state.pageNo = action.payload;
     },
+    setTotalPages(state, action) {
+      state.totalPages = action.payload;
+    },
+    setTotalResults(state, action) {
+      state.totalResults = action.payload;
+    },
     resetFilters(state) {
       state.selectedSort = 'popularity.desc';
       state.pageNo = 1;
-    }
-  }
+      state.totalPages = 1;
+      state.totalResults = 0;
+    },
+  },
 });
 
 export const {
@@ -50,7 +63,9 @@ export const {
   setSearchQuery,
   setGenreList,
   setPageNo,
-  resetFilters
+  setTotalPages,
+  setTotalResults,
+  resetFilters,
 } = resultPageSlice.actions;
 
 export default resultPageSlice.reducer;
