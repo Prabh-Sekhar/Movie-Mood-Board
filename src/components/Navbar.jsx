@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import "./Navbar.css";
 import { NavLink } from "react-router-dom";
-import SearchBar from "./SearchBar";
+import SearchBar from "./searchBar";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
