@@ -40,6 +40,7 @@ body {
 .navbar>ul {
     list-style: none;
     display: flex;
+    align-items: center;
     gap: 30px;
     margin: 0;
     padding: 0;
@@ -57,12 +58,62 @@ body {
     border: 1px solid transparent;
 }
 
-/* Transparent with glowing border instead of solid background */
+/* Regular nav items (HOME and MOOD) */
 .nav-item:hover,
 .nav-item.open {
     background: transparent;
     border: 1px solid #6d52ff;
     box-shadow: 0 0 8px rgba(109, 82, 255, 0.6);
+}
+
+/* SEARCH item specific styling */
+.nav-item:last-child {
+    margin-left: 580px;
+    /* Add gap between MOOD and SEARCH */
+    background: transparent;
+    border: 1px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+/* SEARCH item hover effect - glowing purple hyperlink style */
+.nav-item:last-child:hover,
+.nav-item:last-child:active,
+.nav-item:last-child:focus {
+    background: rgba(109, 82, 255, 0.1);
+    border: 1px solid #6d52ff;
+    box-shadow: 0 0 15px rgba(109, 82, 255, 0.8),
+        0 0 30px rgba(109, 82, 255, 0.4),
+        inset 0 0 10px rgba(109, 82, 255, 0.2);
+    color: #ffffff;
+    text-shadow: 0 0 8px rgba(109, 82, 255, 0.8);
+}
+
+/* Extra glow animation for SEARCH */
+.nav-item:last-child:hover::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #6d52ff, #8a6fff, #6d52ff);
+    border-radius: 22px;
+    z-index: -1;
+    opacity: 0.3;
+    animation: pulse 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.3;
+    }
+
+    100% {
+        transform: scale(1.05);
+        opacity: 0.1;
+    }
 }
 
 /* Dropdown */

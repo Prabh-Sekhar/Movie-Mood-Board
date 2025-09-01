@@ -95,7 +95,7 @@ export default function Navbar() {
             )}
           </li>
 
-          <li className="nav-item" onClick={() => setShowSearch(true)}>
+          <li className={`nav-item search-item ${showSearch ? "active" : ""}`} onClick={() => setShowSearch(true)}>
             SEARCH
           </li>
         </ul>

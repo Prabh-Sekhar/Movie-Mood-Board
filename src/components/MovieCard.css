@@ -74,3 +74,30 @@
     margin-right: 4px;
     fill: #ffd700;
 }
+
+.movie-card {
+    position: relative;
+}
+
+.question-mark {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 22px;
+    height: 22px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.movie-card:hover .question-mark {
+    opacity: 1;
+}
